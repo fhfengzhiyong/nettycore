@@ -15,6 +15,11 @@ public class EchoServerHandler extends ChannelHandlerAppender {
     int counter = 0;
 
     @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("客户端连接完成");
+    }
+
+    @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         String body = (String)msg;
         System.out.println("This is "+ ++counter+" times receive client : ["+body+"]");
