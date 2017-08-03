@@ -1,4 +1,19 @@
-package com.straw.nettycore.protobuf;
+/*
+ * Copyright 2012 The Netty Project
+ *
+ * The Netty Project licenses this file to you under the Apache License,
+ * version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at:
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations
+ * under the License.
+ */
+package com.straw.nettycore.c5;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -10,16 +25,18 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.protobuf.ProtobufDecoder;
 import io.netty.handler.codec.protobuf.ProtobufEncoder;
-import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
 /**
- * Created by fengzy on 7/26/2017.
+ * @author lilinfeng
+ * @version 1.0
+ * @date 2014年2月14日
  */
 public class SubReqServer {
-    public void bind() throws Exception {
+    public void bind(int port) throws Exception {
+        // 配置服务端的NIO线程组
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
@@ -30,20 +47,22 @@ public class SubReqServer {
                     .handler(new LoggingHandler(LogLevel.INFO))
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
-                        public void initChannel(SocketChannel ch)
-                                throws Exception {
-                            //它的主要作用于半包处理，
-                            ch.pipeline().addLast(new ProtobufVarint32FrameDecoder());
-                            //ProtobufDecoder解码器，参数为com.google.protobuf.MessageLite 参数，告诉ProtobufDecoder需要解码的目标类是什么
-                            ch.pipeline().addLast(new ProtobufDecoder(SubscribeReqProto.SubscribeReq.getDefaultInstance()));
-                            ch.pipeline().addLast(new ProtobufVarint32LengthFieldPrepender());
+                        public void initChannel(SocketChannel ch) {
+                            // ch.pipeline().addLast(
+                            // new ProtobufVarint32FrameDecoder());
+                            ch.pipeline().addLast(
+                                    new ProtobufDecoder(
+                                            SubscribeReqProto.SubscribeReq
+                                                    .getDefaultInstance()));
+                            ch.pipeline().addLast(
+                                    new ProtobufVarint32LengthFieldPrepender());
                             ch.pipeline().addLast(new ProtobufEncoder());
                             ch.pipeline().addLast(new SubReqServerHandler());
                         }
                     });
 
             // 绑定端口，同步等待成功
-            ChannelFuture f = b.bind(8080).sync();
+            ChannelFuture f = b.bind(port).sync();
 
             // 等待服务端监听端口关闭
             f.channel().closeFuture().sync();
@@ -55,6 +74,14 @@ public class SubReqServer {
     }
 
     public static void main(String[] args) throws Exception {
-        new SubReqServer().bind();
+        int port = 8080;
+        if (args != null && args.length > 0) {
+            try {
+                port = Integer.valueOf(args[0]);
+            } catch (NumberFormatException e) {
+                // 采用默认值
+            }
+        }
+        new SubReqServer().bind(port);
     }
 }

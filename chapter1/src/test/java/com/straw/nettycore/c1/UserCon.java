@@ -14,7 +14,7 @@ public class UserCon {
 
     private static void conversion(User user) {
         user.setName("splid");
+        user = new User("spcil", 52);
         System.out.println("2:" + user.toString());
     }
-
 }

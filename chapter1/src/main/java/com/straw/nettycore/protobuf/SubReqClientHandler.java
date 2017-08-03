@@ -10,10 +10,13 @@ import io.netty.util.concurrent.EventExecutorGroup;
  * Created by fengzy on 7/26/2017.
  */
 public class SubReqClientHandler extends ChannelHandlerAdapter {
+    public SubReqClientHandler() {
+    }
+
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         for (int i=0;i<10;i++){
-            ctx.write(subReq(i));
+            ctx.writeAndFlush(subReq(i));
         }
         ctx.flush();
     }
