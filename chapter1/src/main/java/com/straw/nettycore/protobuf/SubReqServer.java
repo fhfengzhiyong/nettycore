@@ -1,8 +1,6 @@
-package com.straw.nettycore.echo;
+package com.straw.nettycore.protobuf;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
@@ -10,14 +8,17 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.DelimiterBasedFrameDecoder;
-import io.netty.handler.codec.string.StringDecoder;
+import io.netty.handler.codec.protobuf.ProtobufDecoder;
+import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
+import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
-
-public class EchoServer {
-    public void bind(int port) throws Exception {
+/**
+ * Created by fengzy on 7/26/2017.
+ */
+public class SubReqServer {
+    public void bind() throws Exception {
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
@@ -30,16 +31,18 @@ public class EchoServer {
                         @Override
                         public void initChannel(SocketChannel ch)
                                 throws Exception {
-                            ByteBuf delimiter = Unpooled.copiedBuffer("$_"
-                                    .getBytes());
-                            ch.pipeline().addLast( new DelimiterBasedFrameDecoder(1024,delimiter));
-                            ch.pipeline().addLast(new StringDecoder());
-                            ch.pipeline().addLast(new EchoServerHandler());
+                            //它的主要作用于半包处理，
+                            ch.pipeline().addLast(new ProtobufVarint32FrameDecoder());
+                            //ProtobufDecoder解码器，参数为com.google.protobuf.MessageLite 参数，告诉ProtobufDecoder需要解码的目标类是什么
+                            ch.pipeline().addLast(new ProtobufDecoder(SubscribeReqProto.SubscribeReq.getDefaultInstance()));
+
+                            ch.pipeline().addLast(new ProtobufVarint32LengthFieldPrepender());
+                            ch.pipeline().addLast(new SubReqServerHandler());
                         }
                     });
 
             // 绑定端口，同步等待成功
-            ChannelFuture f = b.bind(port).sync();
+            ChannelFuture f = b.bind(8080).sync();
 
             // 等待服务端监听端口关闭
             f.channel().closeFuture().sync();
@@ -51,14 +54,6 @@ public class EchoServer {
     }
 
     public static void main(String[] args) throws Exception {
-        int port = 8080;
-        if (args != null && args.length > 0) {
-            try {
-                port = Integer.valueOf(args[0]);
-            } catch (NumberFormatException e) {
-                // 采用默认值
-            }
-        }
-        new EchoServer().bind(port);
+        new SubReqServer().bind();
     }
 }

@@ -1,4 +1,5 @@
-package com.straw.nettycore.echo;
+
+package com.straw.nettycore.delimiter;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
@@ -32,7 +33,9 @@ public class EchoServer {
                                 throws Exception {
                             ByteBuf delimiter = Unpooled.copiedBuffer("$_"
                                     .getBytes());
-                            ch.pipeline().addLast( new DelimiterBasedFrameDecoder(1024,delimiter));
+                            ch.pipeline().addLast(
+                                    new DelimiterBasedFrameDecoder(1024,
+                                            delimiter));
                             ch.pipeline().addLast(new StringDecoder());
                             ch.pipeline().addLast(new EchoServerHandler());
                         }

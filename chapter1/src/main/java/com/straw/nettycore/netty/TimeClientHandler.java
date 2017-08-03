@@ -1,12 +1,9 @@
 package com.straw.nettycore.netty;
 
-import com.sun.javafx.scene.control.Logging;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
-
-import java.util.logging.Logger;
 
 /**
  * Created by fengzy on 7/24/2017.

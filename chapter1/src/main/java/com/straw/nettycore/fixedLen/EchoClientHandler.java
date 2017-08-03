@@ -1,8 +1,7 @@
-package com.straw.nettycore.echo;
+package com.straw.nettycore.fixedLen;
 
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerAdapter;
-import io.netty.channel.ChannelHandlerAppender;
 import io.netty.channel.ChannelHandlerContext;
 
 /**
@@ -10,7 +9,7 @@ import io.netty.channel.ChannelHandlerContext;
  */
 public class EchoClientHandler extends ChannelHandlerAdapter {
     private int counter;
-    static final String ECHO_ERQ = "Hi,straw .Welcome to Netty.$_";
+    static final String ECHO_ERQ = "Hi,straw .Welcome to Netty";
     public EchoClientHandler() {
     }
 

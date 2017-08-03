@@ -1,10 +1,9 @@
-package com.straw.nettycore.echo;
+package com.straw.nettycore.fixedLen;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerAdapter;
-import io.netty.channel.ChannelHandlerAppender;
 import io.netty.channel.ChannelHandlerContext;
 
 @Sharable
