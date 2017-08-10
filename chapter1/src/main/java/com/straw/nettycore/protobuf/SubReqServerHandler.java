@@ -14,11 +14,17 @@ public class SubReqServerHandler extends ChannelHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         SubscribeReqProto.SubscribeReq req = (SubscribeReqProto.SubscribeReq) msg;
 
+        System.out.println(req.getUserName());
         if ("straw".equalsIgnoreCase(req.getUserName())){
             System.out.println("Service accept client subscribe req:[ " +req.toString()+"]");
             ctx.writeAndFlush(resp(req.getSubReqID()));
         }
 
+    }
+
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("链接已激活");
     }
 
     private SubscribeRespProto.SubscribeResp resp(int subReqID) {

@@ -8,6 +8,7 @@
   <modules>
     <module>chapter1</module>
       <module>jdk</module>
+      <module>designpatterns</module>
   </modules>
   <packaging>pom</packaging>
 

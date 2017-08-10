@@ -3,7 +3,7 @@ package com.straw.nettycore.c1;
 /**
  * Created by fengzy on 7/26/2017.
  */
-public class User {
+public final class User {
     private String name;
     private int age;
 
