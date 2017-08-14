@@ -8,6 +8,7 @@
   <modules>
     <module>chapter1</module>
       <module>designpatterns</module>
+      <module>common</module>
   </modules>
   <packaging>pom</packaging>
 
