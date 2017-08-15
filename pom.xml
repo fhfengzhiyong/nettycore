@@ -9,6 +9,7 @@
     <module>chapter1</module>
       <module>jdk</module>
       <module>designpatterns</module>
+      <module>common</module>
   </modules>
   <packaging>pom</packaging>
 
