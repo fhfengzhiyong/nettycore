@@ -12,6 +12,7 @@ public class TopicConsumer implements Runnable {
     private String threadName;
 
     public static void main(String[] args) {
+        System.out.println();
         TopicConsumer TopicConsumer =new TopicConsumer("T1");
         TopicConsumer TopicConsumer1 =new TopicConsumer("T2");
         TopicConsumer TopicConsumer2 =new TopicConsumer("T3");
@@ -19,6 +20,9 @@ public class TopicConsumer implements Runnable {
         new Thread(TopicConsumer).start();
         new Thread(TopicConsumer1).start();
         new Thread(TopicConsumer2).start();
+
+
+
 
 
     }
