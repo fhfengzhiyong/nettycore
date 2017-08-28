@@ -13,6 +13,7 @@ public class TopicConsumer implements Runnable {
 
     public static void main(String[] args) {
         System.out.println();
+        System.out.println("1");
         TopicConsumer TopicConsumer =new TopicConsumer("T1");
         TopicConsumer TopicConsumer1 =new TopicConsumer("T2");
         TopicConsumer TopicConsumer2 =new TopicConsumer("T3");
