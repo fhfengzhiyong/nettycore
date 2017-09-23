@@ -5,11 +5,10 @@
         <groupId>com.straw.nettycore</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
+    <modelVersion>4.0.0</modelVersion>
     <artifactId>jdk</artifactId>
     <packaging>jar</packaging>
-
     <name>jdk</name>
     <url>http://maven.apache.org</url>
 
@@ -17,6 +16,34 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <description>这是一个很好的例子</description>
+
+    <distributionManagement>
+        <downloadUrl>http://192.168.2.100:8081/nexus/content/groups/public/</downloadUrl>
+        <relocation>
+            <groupId>org.apache</groupId>
+            <artifactId>my-project</artifactId>
+            <version>1.0</version>
+            <message>We have moved the Project under Apache</message>
+        </relocation>
+        <repository>
+            <uniqueVersion>false</uniqueVersion>
+            <id>company</id>
+            <name>company Repository</name>
+            <url>http://192.168.2.100:8081/nexus/content/groups/public/</url>
+            <layout>default</layout>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Snapshots</name>
+            <url>http://192.168.2.100:8081/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <site>
+            <id>mojo.website</id>
+            <name>Mojo Website</name>
+            <url>scp://beaver.codehaus.org/home/projects/mojo/public_html/</url>
+        </site>
+    </distributionManagement>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -25,4 +52,5 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
 </project>
