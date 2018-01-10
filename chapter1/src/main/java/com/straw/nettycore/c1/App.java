@@ -2,7 +2,7 @@ package com.straw.nettycore.c1;
 
 /**
  * Hello world!
- *
+ * @author fengzy
  */
 public class App 
 {
