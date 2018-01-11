@@ -28,7 +28,9 @@ public class HdfsTest {
         rootLogger.setLevel(Level.INFO);
         rootLogger.addAppender(new ConsoleAppender(new PatternLayout("%-6r [%p] %c - %m%n")));
     }
-    String HDFS_URL = "hdfs://172.19.2.80:9000";
+    //String HDFS_URL = "hdfs://172.19.2.80:9000";
+    String HDFS_URL = "hdfs://192.168.2.105:9000";
+
     @Test
     public void find() throws Exception {
         InputStream in = null;
