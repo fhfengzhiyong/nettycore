@@ -11,8 +11,9 @@
       <module>designpatterns</module>
       <module>common</module>
       <module>activimq</module>
-	<module>hadoop</module>
+      <module>hadoop</module>
       <module>mybatis</module>
+      <module>im</module>
   </modules>
   <packaging>pom</packaging>
 
