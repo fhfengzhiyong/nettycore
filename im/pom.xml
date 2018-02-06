@@ -85,8 +85,8 @@
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
-                    <path>/chat</path>
-                    <port>8085</port>
+                    <path>/im</path>
+                    <port>8084</port>
                     <charset>UTF-8</charset>
                     <server>tomcat7</server>
                 </configuration>

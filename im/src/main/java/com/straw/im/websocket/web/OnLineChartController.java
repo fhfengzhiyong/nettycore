@@ -27,6 +27,7 @@ public class OnLineChartController {
         if (adminUser != null) {
             request.setAttribute("userKey", adminUser.getId());
         }
-        return "system/im/chat";
+        request.setAttribute("user", adminUser);
+        return "/im/chat";
     }
 }

@@ -1,21 +1,12 @@
 var html;
 var static = orgin + "/static/im/";
+
 function load_url() {
-    if (userId == "") {
-        return;
-    }
     $(".chat_inter").click(function () {
         $('#chat_content').modal();
         count = 11;
     });
-    $.ajax({
-        url: chat_orgin,
-        dataType: "html",
-        success: function (data) {
-            $("#chat_content").html(data);
-            open_tcp();
-        }
-    });
+    open_tcp();
 }
 var count;
 var isshow = false;
@@ -64,7 +55,7 @@ function e() {
     $("#textarea").val("");
 }
 $(document).ready(function () {
-    setTimeout("load_url()", 10000);
+    setTimeout("load_url()", 1);
 
     var a = 3, b = static + "img/head/2024.jpg", c = static + "img/head/2015.jpg", d = "\u738b\u65ed";
     document.onkeydown = function (a) {
