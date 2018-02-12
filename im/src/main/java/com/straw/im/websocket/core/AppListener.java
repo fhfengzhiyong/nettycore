@@ -5,10 +5,13 @@ import com.alibaba.fastjson.JSONObject;
 import com.straw.im.websocket.protocol.ImConstant;
 import com.straw.im.websocket.protocol.Message;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketMessage;
+import org.springframework.web.socket.WebSocketSession;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import javax.websocket.Session;
+
 import java.util.List;
 
 /**
@@ -48,17 +51,19 @@ class MessageSendThread extends Thread {
             try {
                 Message message = ImQueue.consumeMessage();
                 System.out.println("==========================================================================");
-                List<Session> clientSession = ImQueue.getClientSession();
-                for (Session session : clientSession) {
+                List<WebSocketSession> clientSession = ImQueue.getClientSession();
+                for (WebSocketSession session : clientSession) {
                     if (session.isOpen()) {
                         //全部用户
                         if (StringUtils.isEmpty(message.getTo_user())) {
-                            session.getAsyncRemote().sendText(JSONObject.toJSONString(message));
+                            WebSocketMessage webSocketMessage = new TextMessage(JSONObject.toJSONString(message));
+                            session.sendMessage(webSocketMessage);
                         } else {
-                            String uid = ((AdminUser) session.getUserProperties().get(ImConstant.USER_OBJECT)).getId();
+                            String uid = ((AdminUser) session.getAttributes().get(ImConstant.USER_OBJECT)).getId();
                             if (message.getTo_user().contains(uid) || message.getFrom_user().equals(uid)) {
                                 message.setFrom_user_nick(message.getFrom_user_nick() + "(私)");
-                                session.getAsyncRemote().sendText(JSONObject.toJSONString(message));
+                                WebSocketMessage webSocketMessage = new TextMessage(JSONObject.toJSONString(message));
+                                session.sendMessage(webSocketMessage);
                             }
                         }
                     }

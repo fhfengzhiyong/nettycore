@@ -14,6 +14,7 @@
       <module>hadoop</module>
       <module>mybatis</module>
       <module>im</module>
+      <module>email</module>
   </modules>
   <packaging>pom</packaging>
 

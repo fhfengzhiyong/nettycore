@@ -1,11 +1,25 @@
 var html;
 var static = orgin + "/static/im/";
+function getCookie(name) {
+    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+    if (arr = document.cookie.match(reg))
+        return unescape(arr[2]);
+    else
+        return null;
+}
+function setCookie(name, value) {
+    var Days = 30;
+    var exp = new Date();
+    exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+    document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+}
 
 function load_url() {
     $(".chat_inter").click(function () {
-        $('#chat_content').modal();
+        //$('#chat_content').modal();
         count = 11;
     });
+    userId = getCookie("userId");
     open_tcp();
 }
 var count;
@@ -26,12 +40,11 @@ function blink(selector) {
     });
 }
 
-var static = "http://" + orgin + "/static/im/";
+//var static = "http://" + orgin + "/static/im/";
 var userlist = new Array();
 
 //var $("#frame3d").contents().find("#chat_content");
 function e() {
-
     var type = "text";
     if ($('#notify_choose').prop('checked')) {
         type = "m_notify";
@@ -56,7 +69,6 @@ function e() {
 }
 $(document).ready(function () {
     setTimeout("load_url()", 1);
-
     var a = 3, b = static + "img/head/2024.jpg", c = static + "img/head/2015.jpg", d = "\u738b\u65ed";
     document.onkeydown = function (a) {
         if (webSocket.readyState != 1) {
@@ -65,18 +77,21 @@ $(document).ready(function () {
         }
         var b = document.all ? window.event : a;
         return 13 == b.keyCode ? (e(), !1) : key_();
-    }, $.fn.setCursorPosition = function (a) {
-        return 0 == this.lengh ? this : $(this).setSelection(a, a)
-    }, $.fn.setSelection = function (a, b) {
-        if (0 == this.lengh)return this;
-        if (input = this[0], input.createTextRange) {
-            var c = input.createTextRange();
-            c.collapse(!0), c.moveEnd("character", b), c.moveStart("character", a), c.select()
-        } else input.setSelectionRange && (input.focus(), input.setSelectionRange(a, b));
-        return this
-    }, $.fn.focusEnd = function () {
-        this.setCursorPosition(this.val().length)
-    }
+    },
+        $.fn.setCursorPosition = function (a) {
+            return 0 == this.lengh ? this : $(this).setSelection(a, a)
+        },
+        $.fn.setSelection = function (a, b) {
+            if (0 == this.lengh)return this;
+            if (input = this[0], input.createTextRange) {
+                var c = input.createTextRange();
+                c.collapse(!0), c.moveEnd("character", b), c.moveStart("character", a), c.select()
+            } else input.setSelectionRange && (input.focus(), input.setSelectionRange(a, b));
+            return this
+        },
+        $.fn.focusEnd = function () {
+            this.setCursorPosition(this.val().length)
+        }
 }), function (a) {
     a.extend({
         blinkTitle: {
@@ -108,20 +123,21 @@ function open_tcp() {
     };
 
     function onMessage(event) {
-        //console.info("接受到消息===" + event.data);
+        console.info("接受到消息===" + event.data);
         var data = JSON.parse(event.data);
         dealEvent(data);
     }
 
     function onOpen(event) {
         notification("链接成功");
+        console.info("链上了");
         //发送身份说明
         webSocket.send("{'type':'auth','message_context':'','from_user':'" + userId + "','to_user':''}");
         $("#chat_inter").addClass("chat_inter_online").removeClass("chat_inter");
     }
 
     function onError(event) {
-        //alert("通信已断开！");
+        console.info("断开了");
         notification("通信已断开！");
         $("#chat_inter").addClass("chat_inter").removeClass("chat_inter_online");
     }
@@ -218,10 +234,10 @@ function key_() {
     var a = window.event.keyCode;
     //ctrl+q
     if ((a == 77) && (event.ctrlKey)) {
-        $('#chat_content').modal();
+        //$('#chat_content').modal();
     }
     if ((a == 81) && (event.ctrlKey)) {
-        $('#chat_content').modal("hide");
+        //$('#chat_content').modal("hide");
     }
 }
 

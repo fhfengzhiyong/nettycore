@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.straw.email.mail.dao.JokeMapper">
+    <resultMap id="BaseResultMap" type="com.straw.email.mail.model.Joke">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="context" jdbcType="VARCHAR" property="context"/>
+        <result column="var1" jdbcType="VARCHAR" property="var1"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, title, context, var1
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from joke
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        DELETE FROM joke
+        WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.straw.email.mail.model.Joke">
+        INSERT INTO joke (id, title, context,
+        var1)
+        VALUES (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{context,jdbcType=VARCHAR},
+        #{var1,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.straw.email.mail.model.Joke">
+        insert into joke
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="context != null">
+                context,
+            </if>
+            <if test="var1 != null">
+                var1,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="context != null">
+                #{context,jdbcType=VARCHAR},
+            </if>
+            <if test="var1 != null">
+                #{var1,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.straw.email.mail.model.Joke">
+        update joke
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="context != null">
+                context = #{context,jdbcType=VARCHAR},
+            </if>
+            <if test="var1 != null">
+                var1 = #{var1,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.straw.email.mail.model.Joke">
+        UPDATE joke
+        SET title = #{title,jdbcType=VARCHAR},
+        context = #{context,jdbcType=VARCHAR},
+        var1 = #{var1,jdbcType=VARCHAR}
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="selectMaxId" resultType="int">
+        SELECT ifnull(max(id), 0)
+        FROM joke;
+    </select>
+    <select id="selectNext" resultMap="BaseResultMap">
+        SELECT *
+        FROM joke
+        WHERE id = (SELECT min(id)
+        FROM joke
+        WHERE var1 = 1)
+    </select>
+    <select id="setConsumption" parameterType="java.lang.Integer">
+        UPDATE joke
+        SET var1 = 2
+        WHERE id = #{id}
+    </select>
+</mapper>

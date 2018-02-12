@@ -251,9 +251,9 @@
 </script>
 
 <script>
-    var orgin, userId, authRole;
+    var orgin, userId, authRole, sessionId;
     orgin = location.hostname + ":" + location.port + location.pathname.substr(0, location.pathname.substr(1, location.pathname.length).indexOf("/") + 1);
     authRole = true;
-    userId = '<%= session.getAttribute("userId")%>';
+    sessionId = '<%= session.getId()%>';
 </script>
 <script src="<c:url value='/static/im/js/chat.js'/>"></script>
