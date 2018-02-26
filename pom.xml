@@ -16,6 +16,7 @@
       <module>im</module>
       <module>email</module>
       <module>httpclient</module>
+      <module>spring</module>
   </modules>
   <packaging>pom</packaging>
 
