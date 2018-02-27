@@ -1,5 +1,8 @@
 package com.straw.nettycore.thread;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 /**
  * @author fengzy
  * @date 2/26/2018
@@ -11,12 +14,12 @@ public class ThreadLoad implements Runnable {
     }
 
     public static void main(String[] args) {
-        Thread thread = new Thread(new ThreadLoad());
-        thread.start();
+        Executor executor = Executors.newFixedThreadPool(10);
+        executor.execute(new ThreadLoad());
         printThreadName();
     }
 
-    public static void printThreadName() {
+    private static void printThreadName() {
         System.out.println("thread name:" + Thread.currentThread().getName());
     }
 }
