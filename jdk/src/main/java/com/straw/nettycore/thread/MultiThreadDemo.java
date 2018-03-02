@@ -7,26 +7,29 @@ import java.util.concurrent.locks.Lock;
  * @date 3/1/2018
  */
 public class MultiThreadDemo {
-    public static class Number{
+    public static class Number {
         private int count;
-        Object object=new Object();
+        Object object = new Object();
 
         /**
          * count 属于类的变量,不能保证
+         *
          * @throws InterruptedException
          */
-        synchronized void increase () throws InterruptedException {
+        synchronized void increase() throws InterruptedException {
             System.out.println("in ");
-           count=10;
-           Thread.sleep(1000);
-           System.out.println("increase value:"+count);
+            count = 10;
+            System.out.println(Thread.currentThread().getState());
+            Thread.sleep(3000);
+            System.out.println("increase value:" + count);
             System.out.println("out");
         }
-        public  void decrease () throws InterruptedException {
+
+        void decrease() throws InterruptedException {
             System.out.println("2 in ");
-            count=-10;
+            count = -10;
             Thread.sleep(1000);
-            System.out.println("decrease value:"+count);
+            System.out.println("decrease value:" + count);
             System.out.println("2 out");
         }
     }
