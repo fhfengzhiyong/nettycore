@@ -1,6 +1,6 @@
 package com.straw.nettycore;
 
-import com.straw.nettycore.core.MyIOUtils;
+import com.straw.nettycore.exp.core.MyIOUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.*;
 import org.apache.hadoop.io.IOUtils;
