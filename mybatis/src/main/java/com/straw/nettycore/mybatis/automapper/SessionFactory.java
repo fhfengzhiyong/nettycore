@@ -1,4 +1,4 @@
-package com.straw.nettycore.mybatis.mysession;
+package com.straw.nettycore.mybatis.automapper;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -25,7 +25,7 @@ class SessionFactory {
     private static void initSqlSessionFactory() {
         InputStream resourceAsStream = null;
         try {
-            resourceAsStream = Resources.getResourceAsStream("t0/mybatis-config.xml");
+            resourceAsStream = Resources.getResourceAsStream("t2/mybatis-config.xml");
         } catch (IOException e) {
             e.printStackTrace();
         }

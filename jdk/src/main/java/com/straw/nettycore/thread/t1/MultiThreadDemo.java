@@ -1,4 +1,4 @@
-package com.straw.nettycore.thread;
+package com.straw.nettycore.thread.t1;
 
 import java.util.concurrent.locks.Lock;
 

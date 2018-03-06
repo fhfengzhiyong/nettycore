@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>                     <!--配置根目录-->
+    <properties/>                   <!--属性用于配置db.properties等-->
+    <settings><!--设置-->
+        <setting name="name" value=""/>
+    </settings>
+    <typeAliases/>                  <!--类型命名-->
+    <typeHandlers/>                 <!--类型处理器-->
+    <objectFactory type=""/>        <!--对象工厂-->
+    <reflectorFactory type=""/>
+    <plugins>
+        <plugin interceptor=""/>
+    </plugins>                      <!--插件-->
+    <environments default="">       <!--配置环境-->
+        <environment id=""  >         <!--环境变量-->
+            <transactionManager type=""/>       <!--事物管理器-->
+            <dataSource type=""  ></dataSource>   <!--数据源-->
+        </environment>
+    </environments>
+    <databaseIdProvider type=""/>   <!--数据库厂商标识-->
+    <mappers/>                       <!--映射器-->
+
+</configuration>

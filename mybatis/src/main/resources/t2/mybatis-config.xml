@@ -5,16 +5,12 @@
 
 <configuration>
     <properties resource="t0/db.properties"/>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
     <typeAliases>
-        <typeAlias type="com.straw.nettycore.jdbc.User" alias="user"/>
+        <typeAlias type="com.straw.nettycore.mybatis.automapper.Role" alias="role"/>
     </typeAliases>
-    <typeHandlers>
-        <typeHandler handler="com.straw.nettycore.mybatis.mysession.StringHandler" javaType="string" jdbcType="VARCHAR"/>
-        <typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="com.straw.nettycore.mybatis.mysession.Sex"/>
-    </typeHandlers>
-    <objectFactory type="com.straw.nettycore.mybatis.mysession.MyObjectFactory" >
-        <property name="name" value="MyObjectFactory"/>
-    </objectFactory> 
     <environments default="dev">
         <environment id="dev">
             <transactionManager type="JDBC"/>
@@ -27,6 +23,6 @@
         </environment>
     </environments>
     <mappers>
-        <mapper  resource="t0/UserMapper.xml"/>
+        <mapper  resource="t2/RoleMapper.xml"/>
     </mappers>
 </configuration>

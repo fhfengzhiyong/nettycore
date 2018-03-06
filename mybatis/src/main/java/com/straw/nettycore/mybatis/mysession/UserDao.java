@@ -9,4 +9,6 @@ import com.straw.nettycore.jdbc.User;
 
 public interface UserDao {
     User selectById(int id);
+
+    void insert(User u);
 }

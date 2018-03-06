@@ -16,15 +16,26 @@ public class UserTest {
         System.out.println(s);
         UserTest test = new UserTest();
         User user = test.select();
-        if (user!=null){
+        if (user != null) {
             System.out.println(user.getEmail());
+            System.out.println(user.getSex().getName());
         }
     }
 
     private User select() {
-        SqlSession sqlSession = SessionFactory.getSqlSessionFactory().openSession();
+
+        SqlSession sqlSession = SessionFactory.openSqlSession();
+        String databaseId = sqlSession.getConfiguration().getDatabaseId();
+        System.out.println("databaseid:"+  databaseId);
         UserDao mapper = sqlSession.getMapper(UserDao.class);
-        User user = mapper.selectById(1);
+        User u = new User();
+        u.setName("str");
+        u.setEmail("4@q.com");
+        u.setId(2);
+        u.setSex(Sex.MALE);
+        //mapper.insert(u);
+        User user = mapper.selectById(2);
+        sqlSession.commit();
         sqlSession.close();
         return user;
     }
