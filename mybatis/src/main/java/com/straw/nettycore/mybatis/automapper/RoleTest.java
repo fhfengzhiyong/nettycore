@@ -11,6 +11,7 @@ public class RoleTest {
         SqlSession sqlSession = SessionFactory.openSqlSession();
         RoleMapper mapper = sqlSession.getMapper(RoleMapper.class);
         Role role = mapper.selectById(1);
+        role = mapper.selectByIdAndRoneName(1,"strawtest");
         if (role!=null){
             System.out.println(role.getRoleName());
         }

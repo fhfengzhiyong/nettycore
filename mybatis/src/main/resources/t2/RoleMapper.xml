@@ -7,5 +7,8 @@
             select id,role_name,note from role a where a.id=#{id}
         ]]>
     </select>
+    <select id="selectByIdAndRoneName" resultType="role">
+        SELECT * from role a where a.id=#{id} and a.role_name=#{roleName}
+    </select>
 
 </mapper>

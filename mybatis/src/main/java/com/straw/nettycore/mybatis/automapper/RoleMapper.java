@@ -7,4 +7,6 @@ package com.straw.nettycore.mybatis.automapper;
 public interface RoleMapper
 {
     public Role selectById(int id);
+
+    Role selectByIdAndRoneName(int id, String roleName);
 }
