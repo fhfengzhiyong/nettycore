@@ -1,0 +1,14 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.straw.nettycore.mybatis.cascade.mapper.LessonMapper">
+
+    <resultMap id="resultMap" type="lesson">
+        <id property="id" column="id"/>
+        <result property="studentId" column="student_id"/>
+        <result property="name" column="name"/>
+    </resultMap>
+    <select id="selectLessonListByStudentId" resultMap="resultMap">
+        SELECT *
+        FROM Lesson
+        WHERE student_id = #{studentId};
+    </select>
+</mapper>

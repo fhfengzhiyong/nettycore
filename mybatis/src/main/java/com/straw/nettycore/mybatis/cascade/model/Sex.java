@@ -1,11 +1,11 @@
-package com.straw.nettycore.mybatis.mysession;
+package com.straw.nettycore.mybatis.cascade.model;
 
 /**
  * @author fengzy
  * @date 3/6/2018
  */
 public enum Sex {
-    MALE(3,"男"),FEMALE(4,"女");
+    MALE(1,"男"),FEMALE(2,"女");
     private int id;
     private String name;
 

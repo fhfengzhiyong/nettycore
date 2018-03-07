@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.straw.nettycore.mybatis.cascade.mapper.StudentCardMapper">
+    <resultMap id="resultMap" type="studentCard">
+        <id property="id" column="id" />
+        <result property="studentId" column="student_id"/>
+        <result property="card" column="card"/>
+    </resultMap>
+    <select id="selectByStudentId" resultMap="resultMap">
+        select *
+        from student_card WHERE student_id=#{studentId};
+    </select>
+</mapper>

@@ -10,5 +10,7 @@
     <select id="selectByIdAndRoneName" resultType="role">
         SELECT * from role a where a.id=#{id} and a.role_name=#{roleName}
     </select>
-
+    <insert id="insert" parameterType="role" keyProperty="id" useGeneratedKeys="true">
+        INSERT  INTO role(role_name,note)VALUES (#{roleName},#{note})
+    </insert>
 </mapper>

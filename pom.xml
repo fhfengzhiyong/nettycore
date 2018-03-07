@@ -17,6 +17,7 @@
       <module>email</module>
       <module>httpclient</module>
       <module>spring</module>
+      <module>solr</module>
   </modules>
   <packaging>pom</packaging>
 
