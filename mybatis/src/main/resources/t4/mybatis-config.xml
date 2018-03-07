@@ -5,13 +5,11 @@
 
 <configuration>
     <properties resource="t3/db.properties"/>
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
     <typeAliases>
-        <typeAlias type="com.straw.nettycore.mybatis.cascade.model.Student" alias="student"/>
-        <typeAlias type="com.straw.nettycore.mybatis.cascade.model.StudentCard" alias="studentCard"/>
-        <typeAlias type="com.straw.nettycore.mybatis.cascade.model.Lesson" alias="lesson"/>
-        <typeAlias type="com.straw.nettycore.mybatis.cascade.model.FemaleHealth" alias="femaleHealth"/>
-        <typeAlias type="com.straw.nettycore.mybatis.cascade.model.MaleHealth" alias="maleHealth"/>
-
+        <typeAlias type="com.straw.nettycore.mybatis.cache.model.User" alias="user"/>
     </typeAliases>
     <typeHandlers>
         <typeHandler  handler="com.straw.nettycore.mybatis.cascade.type.SexEnumTypeHandler" javaType="com.straw.nettycore.mybatis.cascade.model.Sex"/>
@@ -28,11 +26,8 @@
         </environment>
     </environments>
     <mappers>
-        <mapper  resource="t3/StudentMapper.xml"/>
-        <mapper resource="t3/StudentCardMapper.xml"/>
-        <mapper resource="t3/LessonMapper.xml"/>
-        <mapper resource="t3/FeMaleHealthMapper.xml"/>
-        <mapper resource="t3/MaleHealthMapper.xml"/>
+        <mapper  resource="t4/UserMapper.xml"/>
+
 
     </mappers>
 </configuration>

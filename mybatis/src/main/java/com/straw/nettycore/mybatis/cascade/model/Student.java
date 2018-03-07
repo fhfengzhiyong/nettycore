@@ -13,6 +13,24 @@ public class Student {
     private Sex sex;
     private StudentCard studentCard;
     private List<Lesson> lessonList;
+    private FemaleHealth femaleHealth;
+    private MaleHealth maleHealth;
+
+    public FemaleHealth getFemaleHealth() {
+        return femaleHealth;
+    }
+
+    public void setFemaleHealth(FemaleHealth femaleHealth) {
+        this.femaleHealth = femaleHealth;
+    }
+
+    public MaleHealth getMaleHealth() {
+        return maleHealth;
+    }
+
+    public void setMaleHealth(MaleHealth maleHealth) {
+        this.maleHealth = maleHealth;
+    }
 
     public List<Lesson> getLessonList() {
         return lessonList;

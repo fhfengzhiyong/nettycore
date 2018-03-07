@@ -8,7 +8,19 @@
         <result property="sex" column="sex" />
         <association property="studentCard" column="id" select="com.straw.nettycore.mybatis.cascade.mapper.StudentCardMapper.selectByStudentId"/>
         <collection property="lessonList" column="id" select="com.straw.nettycore.mybatis.cascade.mapper.LessonMapper.selectLessonListByStudentId"/>
+        <discriminator javaType="string" column="sex">
+            <case value="1" resultMap="femaleHealthResultMap"/>
+            <case value="2" resultMap="maleHealthResultMap"/>
+        </discriminator>
+
     </resultMap>
+    <resultMap id="femaleHealthResultMap" type="femaleHealth" extends="resultMap">
+        <association   property="femaleHealth" column="id" select="com.straw.nettycore.mybatis.cascade.mapper.FemaleHealthMapper.selectAll"/>
+    </resultMap>
+    <resultMap id="maleHealthResultMap" type="maleHealth"  extends="resultMap">
+        <association property="maleHealth" column="id" select="com.straw.nettycore.mybatis.cascade.mapper.MaleHealthMapper.selectAll"/>
+    </resultMap>
+
     <select id="selectById"  resultMap="resultMap">
         select *
         from student where id=#{id};
