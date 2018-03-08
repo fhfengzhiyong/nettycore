@@ -5,18 +5,54 @@
     <resultMap id="resultMap" type="user">
         <id column="id" property="id" javaType="int" jdbcType="BIGINT"/>
         <result column="email" property="email" javaType="string" jdbcType="VARCHAR"/>
-        <result column="name"  property="name" javaType="string" jdbcType="VARCHAR"/>
+        <result column="name" property="name" javaType="string" jdbcType="VARCHAR"/>
         <result column="sex" property="sex" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
     </resultMap>
     <select id="selectById" resultMap="resultMap">
-        <![CDATA[
-            select id,email,name,sex from users a where a.id=#{id}
-        ]]>
+
+        SELECT
+            id,
+            email,
+            name,
+            sex
+        FROM users a
+
+        WHERE 1=1
+        <if test="id!=null and id !=''">
+            and a.id=#{id}
+        </if>
+
     </select>
     <insert id="insert" parameterType="user">
-        INSERT INTO users (id,email,name,sex)
-                VALUES (#{id},#{email},#{name},
-                        #{sex,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler})
+        INSERT INTO users (id, email, name, sex)
+        VALUES (#{id}, #{email}, #{name},
+                #{sex,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler})
     </insert>
+    <update id="update" parameterType="user">
+        UPDATE users
+        <set>
+            <if test="email != null and email!=''">
+                email=#{email}
+            </if>
+            <if test="name != null and name!=''">
+                name=#{name}
+            </if>
+        </set>
+        <where>
+            id=#{id}
+        </where>
+    </update>
+    <select id="selectBySex" parameterType="list" resultMap="resultMap">
+        SELECT * FROM users
+        <trim prefix="where" prefixOverrides="and">
+           and  sex in
+            <foreach collection="list"   open="(" close=")" item="i" separator="," >
+            #{i}
+        </foreach>
 
+        </trim>
+        <trim prefix="pr" prefixOverrides="ed">
+             ssss
+        </trim>
+    </select>
 </mapper>
