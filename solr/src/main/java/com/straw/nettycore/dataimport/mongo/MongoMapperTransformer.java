@@ -1,14 +1,17 @@
+/*
 package com.straw.nettycore.dataimport.mongo;
 
 import java.util.Map;
 
+*/
 /**
  * Created by IntelliJ IDEA.
  * User: James
  * Date: 15/08/12
  * Time: 13:52
  * To change this template use File | Settings | File Templates.
- */
+ *//*
+
 public class MongoMapperTransformer extends Transformer {
 
     @Override
@@ -31,3 +34,4 @@ public class MongoMapperTransformer extends Transformer {
 
     public static final String MONGO_FIELD = "mongoField";
 }
+*/

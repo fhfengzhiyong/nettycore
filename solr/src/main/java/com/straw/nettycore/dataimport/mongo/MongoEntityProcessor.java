@@ -1,3 +1,4 @@
+/*
 package com.straw.nettycore.dataimport.mongo;
 
 import org.slf4j.Logger;
@@ -7,11 +8,13 @@ import java.util.Map;
 
 import static org.apache.solr.handler.dataimport.DataImportHandlerException.SEVERE;
 
+*/
 /**
  * User: James
  * Date: 14/08/12
  * Time: 09:26
- */
+ *//*
+
 
 
 public class MongoEntityProcessor extends EntityProcessorBase {
@@ -117,3 +120,4 @@ public class MongoEntityProcessor extends EntityProcessorBase {
 
     public static final String COLLECTION = "collection";
 }
+*/

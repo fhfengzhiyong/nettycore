@@ -14,7 +14,10 @@
     </typeHandlers>
     <objectFactory type="com.straw.nettycore.mybatis.mysession.MyObjectFactory" >
         <property name="name" value="MyObjectFactory"/>
-    </objectFactory> 
+    </objectFactory>
+    <plugins>
+        <plugin interceptor="com.straw.nettycore.core.plugin.MyPlugin"/>
+    </plugins>
     <environments default="dev">
         <environment id="dev">
             <transactionManager type="JDBC"/>
@@ -26,6 +29,7 @@
             </dataSource>
         </environment>
     </environments>
+
     <mappers>
         <mapper  resource="t0/UserMapper.xml"/>
     </mappers>

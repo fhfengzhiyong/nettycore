@@ -1,3 +1,4 @@
+/*
 package com.straw.nettycore.dataimport.mongo;
 
 
@@ -15,12 +16,14 @@ import java.util.*;
 import static org.apache.solr.handler.dataimport.DataImportHandlerException.SEVERE;
 import static org.apache.solr.handler.dataimport.DataImportHandlerException.wrapAndThrow;
 
+*/
 /**
  * User: James
  * Date: 13/08/12
  * Time: 18:28
  * To change this template use File | Settings | File Templates.
- */
+ *//*
+
 
 
 public class MongoDataSource extends DataSource<Iterator<Map<String, Object>>> {
@@ -104,7 +107,9 @@ public class MongoDataSource extends DataSource<Iterator<Map<String, Object>>> {
                     return getARow();
                 }
 
-                public void remove() {/* do nothing */
+                public void remove() {*/
+/* do nothing *//*
+
                 }
             };
 
@@ -186,3 +191,4 @@ public class MongoDataSource extends DataSource<Iterator<Map<String, Object>>> {
 
 }
 
+*/
