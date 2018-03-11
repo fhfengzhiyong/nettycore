@@ -52,21 +52,6 @@
             <artifactId>mmseg4j-core</artifactId>
             <version>1.10.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.chenlb.mmseg4j</groupId>
-            <artifactId>mmseg4j-for-solr40</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-analyzers-common</artifactId>
-            <version>5.2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-core</artifactId>
-            <version>5.2.0</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
         <dependency>
             <groupId>org.mongodb</groupId>
