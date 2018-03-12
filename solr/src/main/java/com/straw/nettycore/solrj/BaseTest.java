@@ -13,6 +13,8 @@ import org.apache.solr.common.SolrInputDocument;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 /**
  * http://blog.csdn.net/qq_28988969/article/details/76022082
@@ -90,15 +92,27 @@ public class BaseTest {
         query.setFilterQueries("categoryName:连衣裙");
         query.setFields("goodsName","categoryName","goodsPrice","id","createDate");
         query.setStart(0);
-        query.setRows(100);
+        query.setRows(10);
         SolrQuery.SortClause sortClause = new SolrQuery.SortClause("createDate", SolrQuery.ORDER.desc);
        // query.set("createDate", String.valueOf(SolrQuery.ORDER.asc));
         query.setSort(SolrQuery.SortClause.asc("goodsPrice"));
         query.setSort(sortClause);
-
+        //高亮
         query.setHighlight(true);
+        query.addHighlightField("goodsName");
+        query.setHighlightSimplePre("<font color='red'>");
+        query.setHighlightSimplePost("</font>");
         QueryResponse response = solrClient.query(query);
         soutResult(response.getResults());
+        System.out.println(response);
+        //输出高亮
+        Map<String, Map<String, List<String>>> highlighting = response.getHighlighting();
+        for (int i=0;i<highlighting.size();i++){
+            Object value = response.getResults().get(i).getFieldValue("id");
+            Map<String, List<String>> stringListMap = highlighting.get(value);
+            String price = stringListMap.get("goodsName").get(0);
+            System.out.println(price);
+        }
     }
 }
 
