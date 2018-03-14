@@ -1,4 +1,4 @@
-package com.straw.nettycore.tokenizer;
+package com.straw.nettycore.tokenizer.fk.util;
 
 
 import org.apache.lucene.analysis.TokenStream;

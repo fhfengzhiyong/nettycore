@@ -1,5 +1,6 @@
 package com.straw.nettycore.tokenizer;
 
+import com.straw.nettycore.tokenizer.fk.util.BaseTools;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.Tokenizer;
 import org.junit.Test;

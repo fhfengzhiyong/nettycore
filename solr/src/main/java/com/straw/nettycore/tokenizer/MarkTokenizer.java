@@ -19,6 +19,7 @@ public final class MarkTokenizer  extends Tokenizer{
 
     @Override
     public boolean incrementToken() throws IOException {
+        System.out.println("---buibuibiubi");
         //清除
         clearAttributes();
         if (StringUtils.isEmpty(this.stringToTokenize)) {
@@ -53,11 +54,10 @@ public final class MarkTokenizer  extends Tokenizer{
 
     private String transformReader(Reader input)  {
         char[] bufferChar = new char[1024];
-        int i = 0;
         StringBuilder sb = new StringBuilder();
         try {
-            while ((i=input.read(bufferChar,0,bufferChar.length))!=-1){
-                sb.append(bufferChar, 0, i);
+            while (input.read(bufferChar) !=-1){
+                sb.append(bufferChar);
             }
         } catch (IOException e) {
             e.printStackTrace();
