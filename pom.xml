@@ -18,6 +18,7 @@
       <module>httpclient</module>
       <module>spring</module>
       <module>solr</module>
+      <module>zookeeper</module>
   </modules>
   <packaging>pom</packaging>
 
