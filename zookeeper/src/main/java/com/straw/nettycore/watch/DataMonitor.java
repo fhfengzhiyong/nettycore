@@ -60,9 +60,11 @@ public class DataMonitor implements  StatCallback {
     public void process(WatchedEvent event) {
         String path = event.getPath();
         System.out.println("process");
+        System.out.println(event.getState());
         if (event.getType() == Watcher.Event.EventType.None) {
             // We are are being told that the state of the
             // connection has changed
+
             switch (event.getState()) {
                 case SyncConnected:
                     // In this particular example we don't need to do anything
@@ -80,6 +82,7 @@ public class DataMonitor implements  StatCallback {
             if (path != null && path.equals(znode)) {
                 // Something has changed on the node, let's find out
                 System.out.println("this is ....");
+                //改修以后再次监控.
                 zk.exists(znode, true, this, null);
             }
         }
@@ -126,7 +129,7 @@ public class DataMonitor implements  StatCallback {
         if ((b == null && b != prevData)
                 || (b != null && !Arrays.equals(prevData, b))) {
            // listener.exists(b);
-            System.out.println(new String(b));
+            System.out.println("数据为:"+new String(b));
             prevData = b;
         }
     }

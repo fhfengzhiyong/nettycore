@@ -47,7 +47,7 @@ public class Executor
                     .println("USAGE: Executor hostPort znode filename program [args ...]");
             //System.exit(2);
         }
-        String[] zargs = new String[]{"172.19.2.81:2181", "/app", "test", "calc"};
+        String[] zargs = new String[]{"192.168.2.105:2181", "/app", "test", "calc"};
         String hostPort = zargs[0];
         String znode = zargs[1];
         String filename = zargs[2];

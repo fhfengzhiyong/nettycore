@@ -5,15 +5,23 @@ package com.straw.nettycore.common;
  * @date 3/14/2018
  */
 public class Outer {
-    int i;
-    String a;
+
     public void ma(){
+        System.out.println("outer ...");
     }
 
     public class Inner {
-        String b;
-        public static final String A = "";
-
+       /* Outer outer(){
+            return Outer.this;
+        }*/
     }
 
+
+    public static void main(String[] args) {
+        Outer outer = new Outer();
+        System.out.println(outer);
+        Outer.Inner inner =  outer.new Inner();
+       // inner.outer().ma();
+       // System.out.println(inner.outer());
+    }
 }
