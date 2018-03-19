@@ -1,4 +1,4 @@
-package com.straw.nettycore.watchznode;
+package com.straw.nettycore.watchznode.t1;
 
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
@@ -18,7 +18,7 @@ public class Executor  implements Watcher ,Runnable{
     DataMonnitor dm;
 
 
-    public Executor(String host, String path, Watcher watcher) throws IOException {
+    public Executor(String host, String path) throws IOException {
         this.host = host;
         this.path = path;
         zk = new ZooKeeper(host, 3000, this);
@@ -28,7 +28,7 @@ public class Executor  implements Watcher ,Runnable{
     public static void main(String[] args) {
         Executor executor = null;
         try {
-            new Executor("172.19.2.81:2181", "/app/ab", null).run();
+            new Executor("172.19.2.81:2181", "/app/ab").run();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -141,12 +141,56 @@ public class ZookeeperCmd {
             e.printStackTrace();
         }
     }
+
     @Test
-    public void test5(){
-        System.out.println(Runtime.getRuntime().maxMemory()/1024/1204);
+    public void test5() {
+        System.out.println(Runtime.getRuntime().maxMemory() / 1024 / 1204);
         try {
             System.out.println(Runtime.getRuntime().exec("calc"));
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void test6() {
+        ZooKeeper zooKeeper = getZooKeeper();
+        byte[] data = new byte[0];
+        try {
+            data = zooKeeper.getData("/zk/sb", false, null);
+            System.out.println("会执行吗");
+        } catch (KeeperException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(new String(data));
+    }
+
+    @Test
+    public void test7() {
+        ZooKeeper zooKeeper = getZooKeeper();
+        List<ACL> acls = new ArrayList<ACL>();
+        acls.add(new ACL(31, new Id("world", "anyone")));
+        try {
+            String path = zooKeeper.create("/zk/ab", "dt".getBytes(), acls, CreateMode.PERSISTENT);
+            System.out.println(path);
+        } catch (KeeperException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void test() {
+        ZooKeeper zooKeeper = getZooKeeper();
+        try {
+            Stat exists = zooKeeper.exists("/zk/ac", false);
+            System.out.println("是否存在:"+exists);
+        } catch (KeeperException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }

@@ -34,7 +34,7 @@ public class DataRun {
     @Test
     public void test3(){
         DataMode dataMode = new DataMode();
-        Thread thread = new Thread(new ZkSyncDataCountThread(dataMode));
+        Thread thread = new Thread(new ZkSyncDataCountThread(dataMode,10));
         thread.start();
         try {
             Thread.sleep(1000);
@@ -48,12 +48,12 @@ public class DataRun {
         int threadCount = 100;
         DataMode dataMode = new DataMode();
         for (int i = 0; i < threadCount; i++) {
-            Thread thread = new Thread(new ZkSyncDataCountThread(dataMode));
+            Thread thread = new Thread(new ZkSyncDataCountThread(dataMode,i));
             thread.setName("thread-"+i);
             thread.start();
         }
         try {
-            Thread.sleep(100000);
+            Thread.sleep(15000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

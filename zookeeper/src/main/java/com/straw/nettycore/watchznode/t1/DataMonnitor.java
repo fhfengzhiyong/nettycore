@@ -1,4 +1,4 @@
-package com.straw.nettycore.watchznode;
+package com.straw.nettycore.watchznode.t1;
 
 import org.apache.zookeeper.*;
 import org.apache.zookeeper.KeeperException.Code;
@@ -8,7 +8,7 @@ import org.apache.zookeeper.data.Stat;
  * @author fengzy
  * @date 3/16/2018
  */
-public class DataMonnitor implements Watcher, AsyncCallback.StatCallback{
+public class DataMonnitor implements Watcher, AsyncCallback.StatCallback {
 
 
     ZooKeeper zk;
@@ -23,22 +23,33 @@ public class DataMonnitor implements Watcher, AsyncCallback.StatCallback{
 
     @Override
     public void processResult(int rc, String path, Object ctx, Stat stat) {
-        System.out.println("监控的结果:"+rc);//输出返回的resultCode
         boolean extis = false;
-
-        if (rc==Code.OK.intValue()){
+        if (rc == Code.OK.intValue()) {
             extis = true;
-        }else{
+        } else {
             System.out.println("no ......");
         }
-
-        //再次监控
-        zk.exists(path, true, this, null);
+        boolean exists;
+        switch (rc) {
+            case KeeperException.Code.Ok:
+                exists = true;
+                break;
+            case KeeperException.Code.NoNode:
+                exists = false;
+                break;
+            case KeeperException.Code.SessionExpired:
+            case KeeperException.Code.NoAuth:
+                dead = true;
+                return;
+            default:
+                // Retry errors
+                zk.exists(path, true, this, null);
+                return;
+        }
         try {
-            if (extis){
-                byte[] data = zk.getData(path, false, null);
-                System.out.println(new String(data));
-            }
+
+            byte[] data = zk.getData(path, false, null);
+            System.out.println("data:"+new String(data));
         } catch (KeeperException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -49,7 +60,6 @@ public class DataMonnitor implements Watcher, AsyncCallback.StatCallback{
     @Override
     public void process(WatchedEvent event) {
         System.out.println("process   ... ");
-        dead = false;
         zk.exists(path, true, this, null);
     }
 }

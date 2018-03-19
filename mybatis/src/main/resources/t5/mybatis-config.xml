@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <properties resource="t0/db.properties"/>
+    <typeAliases>
+        <typeAlias type="com.straw.nettycore.jdbc.User" alias="user"/>
+    </typeAliases>
+    <typeHandlers>
+        <typeHandler handler="com.straw.nettycore.mybatis.mysession.StringHandler" javaType="string" jdbcType="VARCHAR"/>
+        <typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="com.straw.nettycore.mybatis.mysession.Sex"/>
+    </typeHandlers>
+    <objectFactory type="com.straw.nettycore.mybatis.mysession.MyObjectFactory" >
+        <property name="name" value="MyObjectFactory"/>
+    </objectFactory>
+    <plugins>
+        <plugin interceptor="com.straw.nettycore.core.plugin.MyPlugin"/>
+    </plugins>
+    <environments default="dev">
+        <environment id="dev">
+            <transactionManager type="JDBC"/>
+            <dataSource type="com.straw.nettycore.mybatis.mysession.DbcpDataSourceFactory">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper  resource="t5/UserMapper.xml"/>
+    </mappers>
+</configuration>
