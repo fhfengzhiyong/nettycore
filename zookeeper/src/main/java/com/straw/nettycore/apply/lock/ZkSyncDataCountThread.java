@@ -53,7 +53,6 @@ public class ZkSyncDataCountThread implements Runnable {
                     e.printStackTrace();
                 }
             }
-
         }
     }
 }

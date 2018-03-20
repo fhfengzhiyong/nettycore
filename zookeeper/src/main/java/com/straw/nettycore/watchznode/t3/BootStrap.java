@@ -28,7 +28,7 @@ public class BootStrap implements Runnable,WatchInstance.DataProcess {
     }
 
     private static ZooKeeper getZookeeper() throws IOException {
-        return new ZooKeeper("172.19.2.81:2183", 3000, new Watcher() {
+        return new ZooKeeper("192.168.2.105:2181", 3000, new Watcher() {
             @Override
             public void process(WatchedEvent event) {
                 System.out.println("开始了请求状态为:" + event.getState());
