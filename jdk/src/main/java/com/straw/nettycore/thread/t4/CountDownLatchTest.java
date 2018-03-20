@@ -49,6 +49,7 @@ public class CountDownLatchTest {
                     } catch (BrokenBarrierException e) {
                         e.printStackTrace();
                     }
+                    System.out.println("继续执行");
                 }
             }).start();
         }

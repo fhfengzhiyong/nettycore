@@ -194,4 +194,26 @@ public class ZookeeperCmd {
             e.printStackTrace();
         }
     }
+    @Test
+    public void test8(){
+        ZooKeeper zk = null;
+        try {
+            zk = new ZooKeeper("172.19.2.81:2181", 3000, new Watcher() {
+                @Override
+                public void process(WatchedEvent event) {
+                    System.out.println(event.getState());
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            Stat stat = zk.exists("/br", false);
+            System.out.println(stat);
+        } catch (KeeperException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
