@@ -24,6 +24,26 @@ import java.util.Map;
 public class BaseTest {
     private static final String SOLR_URL = "http://localhost:8080/solr/core0";
     private static final String SOLR_URL_MYSQL = "http://localhost:8080/solr/mysql";
+    public static final String SOLR_URL_TB_STORE_OPTIONS = "http://127.0.0.1:8080/solr/tb_store_options";
+
+    @Test
+    public void queryFq() {
+        SolrClient solrClient = new HttpSolrClient(SOLR_URL_TB_STORE_OPTIONS);
+        SolrQuery query = new SolrQuery();
+        String store_id = "00008b6c-774b-4c6e-8344-7ba1475116cd";
+        //query.setQuery(store_id);
+        query.setQuery("*:*");
+        query.setFilterQueries("store_id:" + store_id);
+        try {
+            QueryResponse response = solrClient.query(query);
+            SolrDocumentList results = response.getResults();
+            soutResult(results);
+        } catch (SolrServerException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @Test
     public void addDocument() throws IOException, SolrServerException {
         SolrClient solrClient =new HttpSolrClient(SOLR_URL);
